@@ -32,10 +32,10 @@ jobs:
         cd Terraform
         terraform init
 
-    - name: Apply Terraform Configuration for Cluster
-      run: |
-        cd Terraform
-        terraform apply -auto-approve
+    # - name: Apply Terraform Configuration for Cluster
+    #   run: |
+    #     cd Terraform
+    #     terraform apply -auto-approve
 
   # deploy-application:
   #   runs-on: ubuntu-latest
