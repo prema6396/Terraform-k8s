@@ -100,7 +100,7 @@ jobs:
   #       cd path/to/terraform/cluster
   #       terraform init
 
-  #   - name: Destroy Terraform Resources for Cluster
-  #     run: |
-  #       cd path/to/terraform/cluster
-  #       terraform destroy -auto-approve
+    - name: Destroy Terraform Resources for Cluster
+      run: |
+        cd Terraform
+        terraform destroy -auto-approve
