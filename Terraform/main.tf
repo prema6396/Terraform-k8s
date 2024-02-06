@@ -9,7 +9,7 @@ terraform {
 
 provider "google" {
  
-  credentials = file("/path/to/your/service-account-key.json")  # Replace with the actual path to your service account JSON key file
+  credentials = "keys.json"  # Replace with the actual path to your service account JSON key file
   project     = "encoded-stage-408805"                               # Replace with your Google Cloud project ID
   region      = "us-central1"                                    # Replace with your desired region, e.g., "us-central1"
 
