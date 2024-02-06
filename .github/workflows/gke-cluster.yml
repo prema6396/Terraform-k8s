@@ -2,7 +2,7 @@ name: K8s Workflow
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy-cluster:
@@ -32,10 +32,14 @@ jobs:
         cd Terraform
         terraform init
 
-    # - name: Apply Terraform Configuration for Cluster
-    #   run: |
-    #     cd Terraform
-    #     terraform apply -auto-approve
+    - name: Apply Terraform Configuration for Cluster
+      run: |
+        cd Terraform
+        terraform apply -auto-approve
+    - name: Destroy Terraform Resources for Cluster
+      run: |
+        cd Terraform
+        terraform destroy -auto-approve
 
   # deploy-application:
   #   runs-on: ubuntu-latest
@@ -100,7 +104,4 @@ jobs:
   #       cd path/to/terraform/cluster
   #       terraform init
 
-    - name: Destroy Terraform Resources for Cluster
-      run: |
-        cd Terraform
-        terraform destroy -auto-approve
+  
