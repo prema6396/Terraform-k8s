@@ -2,7 +2,7 @@ name: K8s Workflow
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   deploy-cluster:
     runs-on: ubuntu-latest
@@ -35,15 +35,25 @@ jobs:
       run: |
         cd Terraform
         terraform apply -auto-approve
-    - name: Deploy Nginx using Docker
+    - name: Deploy Nginx Application
       run: |
-        kubectl create deployment nginx-deployment --image=nginx:latest
-        kubectl expose deployment nginx-deployment --port=80 --type=LoadBalancer
+        kubectl apply -f nginx.yaml
 
     - name: Wait for LoadBalancer IP
       run: |
         sleep 30  # Adjust this sleep duration based on your cluster's provisioning time
         kubectl get svc nginx-deployment -o jsonpath='{.status.loadBalancer.ingress[0].ip}' | tee nginx-ip.txt
+    - name: Check if App is Hosted
+      run: |
+        EXTERNAL_IP=$(cat nginx-ip.txt)
+        STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://$EXTERNAL_IP)
+
+        if [ $STATUS_CODE -eq 200 ]; then
+          echo "Application is hosted and accessible. HTTP Status Code: $STATUS_CODE"
+        else
+          echo "Application may not be accessible. HTTP Status Code: $STATUS_CODE"
+          exit 1
+        fi
   destroy-cluster:
     runs-on: ubuntu-latest
 
