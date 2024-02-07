@@ -15,7 +15,7 @@ provider "google" {
 
 }
 resource "google_container_cluster" "my_cluster" {
-  name     = "my-gke-cluster"
+  name     = "my-gke1-cluster"
   location = "us-central1-a"                           # Replace with your desired GKE cluster location, e.g., "us-central1-a"
 
   initial_node_count = 1
