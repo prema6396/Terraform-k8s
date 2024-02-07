@@ -34,7 +34,8 @@ jobs:
     - name: Apply Terraform Configuration for Cluster
       run: |
         cd Terraform
-        terraform apply -auto-approve
+        kubectl get nodes
+        # terraform apply -auto-approve
     - name: Deploy Nginx Application
       run: |
         kubectl apply -f nginx.yaml
