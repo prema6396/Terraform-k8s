@@ -2,7 +2,7 @@ name: K8s Workflow
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   deploy-cluster:
     runs-on: ubuntu-latest
